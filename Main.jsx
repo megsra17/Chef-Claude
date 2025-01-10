@@ -12,6 +12,7 @@ export default function Main() {
     "pasta",
   ]);
   const [recipe, setRecipe] = React.useState("");
+  const recipeSection = React.useRef(null);
 
   async function getRecipe() {
     const recipeMarkdown = await getRecipeFromChefClaude(ingredients);
@@ -36,7 +37,11 @@ export default function Main() {
       </form>
 
       {ingredients.length > 0 && (
-        <IngredientsList ingredients={ingredients} getRecipe={getRecipe} />
+        <IngredientsList
+          ref={recipeSection}
+          ingredients={ingredients}
+          getRecipe={getRecipe}
+        />
       )}
 
       {recipe && <ClaudeRecipe recipe={recipe} />}
